@@ -7,3 +7,17 @@ h1. {{ page.title }}
 p(meta). 06 Fev 2011
 
 Hello you ! It's just a test
+
+{% highlight php %}
+namespace Application;
+
+use Zend\Test;
+
+class Test {
+  public $test;
+  
+  public function test($hello){
+    return $hello;
+  }
+}
+{% endhighlight %}
