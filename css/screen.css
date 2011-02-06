@@ -1,0 +1,12 @@
+.highlight {
+  background: black;
+}
+
+pre {
+  padding: 0.7em;
+  background-color: black;
+  overflow: auto;
+  line-height: 1.3em;
+  font-size: 85%;
+  color: white;
+}
