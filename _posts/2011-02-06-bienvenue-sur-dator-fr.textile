@@ -9,6 +9,7 @@ p(meta). 06 Fev 2011
 Hello you ! It's just a test
 
 {% highlight php %}
+<?php
 namespace Application;
 
 use Zend\Test;
