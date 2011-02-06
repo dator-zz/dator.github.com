@@ -1,0 +1,9 @@
+---
+layout: default
+title: Bienvenue sur Dator.fr
+---
+
+h1. {{ page.title }}
+p(meta). 06 Fev 2011
+
+Hello you ! It's just a test
