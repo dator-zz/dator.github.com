@@ -4,9 +4,23 @@ title: Bienvenue sur Dator.fr
 ---
 
 h1. {{ page.title }}
-p(meta). 06 Fev 2011
+p (meta). 06 Fev 2011
 
 Hello you ! It's just a test
+
+{% highlight "html+django" %}
+<form action="#" method="post">
+    <ul>
+        {% for error in form.name.errors %}
+            <li>{{ error.0 }}</li>
+        {% endfor %}
+    </ul>
+    <input type="text" name="name" value="{{ form.name.data }}" />
+
+    <input type="submit" />
+</form>
+{% endhighlight %}
+
 
 {% highlight php %}
 <?php
@@ -22,3 +36,4 @@ class Test {
   }
 }
 {% endhighlight %}
+

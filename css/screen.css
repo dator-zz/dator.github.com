@@ -1,5 +1,6 @@
 body{
-  font: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
 .highlight {
@@ -13,4 +14,6 @@ pre {
   line-height: 1.3em;
   font-size: 85%;
   color: white;
+  font-family: monospace;
+  white-space: pre;
 }
