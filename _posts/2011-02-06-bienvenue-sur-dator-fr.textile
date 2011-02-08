@@ -4,26 +4,9 @@ title: Bienvenue sur Dator.fr
 ---
 
 h1. {{ page.title }}
-p (meta). 06 Fev 2011
+<p>Hello</p>
 
-Hello you ! It's just a test
-
-{% highlight "html+django" %}
-<form action="#" method="post">
-    <ul>
-        {% for error in form.name.errors %}
-            <li>{{ error.0 }}</li>
-        {% endfor %}
-    </ul>
-    <input type="text" name="name" value="{{ form.name.data }}" />
-
-    <input type="submit" />
-</form>
-{% endhighlight %}
-
-
-{% highlight php %}
-<?php
+{% highlight php startinline linenos %}
 namespace Application;
 
 use Zend\Test;
@@ -32,8 +15,20 @@ class Test {
   public $test;
   
   public function test($hello){
-    return $hello;
+    return $this->test;
   }
 }
 {% endhighlight %}
 
+{% highlight html+django linenos %}
+<form action="#" method="post">
+    <ul>
+        {\% for error in form.name.errors \%}
+            <li>\{\{ error.0 \}\}</li>
+        {\% endfor \%}
+    </ul>
+    <input type="text" name="name" value="{{ form.name.data }}" />
+
+    <input type="submit" />
+</form>
+{% endhighlight %}
