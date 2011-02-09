@@ -2,9 +2,19 @@
 layout: default
 ---
 <div id="post">
-{{ content }}
-</div>
-<!-- Add disqus -->
+{{ content }}  
+<div id="disqus_thread"></div>
+  <script> 
+      var disqus_url = 'http://dator.github.com{{ page.url }}';
+      var disqus_identifier = '{{ page.id }}'
+      var disqus_container_id = 'disqus_thread';
+      var disqus_title = "{{ page.title }}";
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
 <div id="related">
   <h2>Related Posts</h2>
   <ul class="posts">

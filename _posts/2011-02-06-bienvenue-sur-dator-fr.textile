@@ -1,34 +1,130 @@
 ---
-layout: default
+layout: post
 title: Bienvenue sur Dator.fr
 ---
 
 h1. {{ page.title }}
 <p>Hello</p>
 
-{% highlight php startinline linenos %}
-namespace Application;
+{% highlight php startinline %}
+// src/Sensio/HelloBundle/Contact/ContactForm.php
+use Symfony\Component\Form
+use Symfony\Component\Form\TextField
+use Symfony\Component\Form\TextareaField
+use Symfony\Component\Form\EmailField
+use Symfony\Component\Form\CheckboxField
 
-use Zend\Test;
-
-class Test {
-  public $test;
-  
-  public function test($hello){
-    return $this->test;
-  }
+class ContactForm extends Form
+{
+    protected function configure()
+    {
+        $this->add(new TextField('subject', array(
+            'max_length' => 100,
+        )));
+        $this->add(new TextareaField('message'));
+        $this->add(new EmailField('sender'));
+        $this->add(new CheckboxField('ccmyself', array(
+            'required' => false,
+        )));
+    }
 }
 {% endhighlight %}
 
-{% highlight html+django linenos %}
-<form action="#" method="post">
-    <ul>
-        {\% for error in form.name.errors \%}
-            <li>\{\{ error.0 \}\}</li>
-        {\% endfor \%}
-    </ul>
-    <input type="text" name="name" value="{{ form.name.data }}" />
+{% highlight php startinline %}
 
-    <input type="submit" />
-</form>
+namespace Entities;
+
+use Documents\Product;
+
+/**
+ * @Entity
+ * @Table(name="orders")
+ * @HasLifecycleCallbacks
+ */
+class Order
+{
+    /**
+     * @Id @Column(type="integer")
+     * @GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @Column(type="string")
+     */
+    private $productId;
+
+    /**
+     * @var Documents\Product
+     */
+    private $product;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getProductId()
+    {
+        return $this->productId;
+    }
+
+    public function setProduct(Product $product)
+    {
+        $this->productId = $product->getId();
+        $this->product = $product;
+    }
+
+    public function getProduct()
+    {
+        return $this->product;
+    }
+}
+{% endhighlight %}
+
+{% highlight text %}
+Order Object
+(
+    [id:Entities\Order:private] => 53
+    [productId:Entities\Order:private] => 4c74a1868ead0ed7a9000000
+    [product:Entities\Order:private] => Proxies\DocumentsProductProxy Object
+        (
+            [__isInitialized__] => 1
+            [id:Documents\Product:private] => 4c74a1868ead0ed7a9000000
+            [title:Documents\Product:private] => Test Product
+        )
+
+)
+{% endhighlight %}
+
+{% highlight xml %}
+<?xml version="1.0" ?>
+
+<container xmlns="http://www.symfony-project.org/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:doctrine="http://www.symfony-project.org/schema/dic/doctrine/odm/mongodb"
+    xsi:schemaLocation="http://www.symfony-project.org/schema/dic/services http://www.symfony-project.org/schema/dic/services/services-1.0.xsd
+                        http://www.symfony-project.org/schema/dic/doctrine/odm/mongodb http://www.symfony-project.org/schema/dic/doctrine/odm/mongodb/mongodb-1.0.xsd">
+
+    <doctrine:mongodb server="mongodb://localhost:27017">
+        <metadata_cache_driver type="memcache">
+            <class>Doctrine\Common\Cache\MemcacheCache</class>
+            <host>localhost</host>
+            <port>11211</port>
+            <instance_class>Memcache</instance_class>
+        </metadata_cache_driver>
+        <options>
+            <connect>true</connect>
+        </options>
+    </doctrine:mongodb>
+</container>
+{% endhighlight %}
+
+{% highlight yaml %}
+
+# src/Sensio/HelloBundle/Resources/config/routing.yml
+hello:
+    pattern:      /hello/{name}.{_format}
+    defaults:     { _controller: HelloBundle:Hello:index, _format: html }
+    requirements: { _format: (html|xml|json) }
 {% endhighlight %}
